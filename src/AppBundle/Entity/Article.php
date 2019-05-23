@@ -53,7 +53,86 @@ class Article
     private $categorie;
 
 
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
+    /**
+     * Set libelle
+     *
+     * @param string $libelle
+     *
+     * @return $article
+     */
+    public function setLibelle($libelle)
+    {
+        $this->libelle = $libelle;
 
+        return $this;
+    }
+
+    /**
+     * Get libelle
+     *
+     * @return string
+     */
+    public function getLibelle()
+    {
+        return $this->libelle;
+    }
+
+    /**
+     * Set prix
+     *
+     * @param int $prix
+     *
+     * @return $article
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    /**
+     * Get prix
+     *
+     * @return int
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * Set stock
+     *
+     * @param int $stock
+     *
+     * @return $article
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return int
+     */
+    public function getStock()
+    {
+        return $this->stock;
+    }
 }
 

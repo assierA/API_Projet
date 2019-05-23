@@ -18,6 +18,17 @@ use FOS\RestBundle\Controller\Annotations\Post;
 class ArticleController extends AbstractFOSRestController
 {
 
+    public function plusVendusAction($max = 3)
+    {
+        // rechercher en BD les "$max" articles les plus vendus
+        $res = $this->getDoctrine()->getManager()->getRepository('mi01VitrineBundle:Article')->getPopular($max);
+        $articles = array();
+        foreach ($res as $ligne) $articles[] = $ligne[0];
+        return $this->render('mi01VitrineBundle:Article:plusVendus.html.twig',
+            array('articles' => $articles));
+    }
+
+
     public function getArticle($id) {
         $article = $this->getDoctrine()->getRepository('AppBundle:Article')->find($id);
         return $article;
