@@ -3,6 +3,8 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Categorie;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
@@ -18,6 +20,8 @@ class Article
      * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
+     *
+     * @Expose
      */
     private $id;
 
@@ -25,6 +29,8 @@ class Article
      * @var string
      *
      * @ORM\Column(name="libelle", type="string", length=100, nullable=false)
+     * @Expose
+     * @Assert\NotBlank
      */
     private $libelle;
 
@@ -39,6 +45,8 @@ class Article
      * @var integer
      *
      * @ORM\Column(name="stock", type="integer", nullable=false)
+     * @Expose
+     * @Assert\NotBlank
      */
     private $stock;
 
@@ -49,6 +57,8 @@ class Article
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
      * })
+     * @Expose
+     * @Assert\NotBlank
      */
     private $categorie;
 
@@ -61,6 +71,20 @@ class Article
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param int $id
+     *
+     * @return $article
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**
@@ -133,6 +157,30 @@ class Article
     public function getStock()
     {
         return $this->stock;
+    }
+
+    /**
+     * Set categorie
+     *
+     * @param categorie $categorie
+     *
+     * @return $article
+     */
+    public function setCategorie($categorie)
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Get categorie
+     *
+     * @return $categorie
+     */
+    public function getCategorie()
+    {
+        return $this->categorie;
     }
 }
 

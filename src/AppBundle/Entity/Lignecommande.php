@@ -55,6 +55,54 @@ class Lignecommande
      */
     private $commande;
 
+    public function getId() {
+        return $this->id;
+    }
 
+    public function setId($id) {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getQuantite() {
+        return $this->quantite;
+    }
+
+    public function setQuantite($quantite) {
+        $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function setPrix($prix) {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getPrix() {
+        return $this->prix;
+    }
+
+    public function getArticle() {
+        return $this->article;
+    }
+
+    public function setArticle($article) {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getCommande() {
+        return $this->commande;
+    }
+
+    public function setCommande($commande) {
+        $this->commande = $commande;
+
+        return $this;
+    }
 }
 

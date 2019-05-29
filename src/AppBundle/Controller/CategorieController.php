@@ -3,7 +3,7 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Secteur;
+use AppBundle\Entity\Categorie;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,8 +19,8 @@ class CategorieController extends AbstractFOSRestController
 {
 
     public function getCategorie($id) {
-        $article = $this->getDoctrine()->getRepository('AppBundle:Categorie')->find($id);
-        return $article;
+        $categorie = $this->getDoctrine()->getRepository('AppBundle:Categorie')->find($id);
+        return $categorie;
     }
     /**
      * @Rest\View()
@@ -28,8 +28,8 @@ class CategorieController extends AbstractFOSRestController
      */
     public function getCategoriesAction()
     {
-        $articles =  $this->getDoctrine()->getRepository('AppBundle:Categorie')->findAll();
-        return $articles;
+        $categories =  $this->getDoctrine()->getRepository('AppBundle:Categorie')->findAll();
+        return $categories;
     }
 
     /**
@@ -38,21 +38,22 @@ class CategorieController extends AbstractFOSRestController
      */
     public function getCategorieAction(Request $request)
     {
-        $article = $this->getCategorie($request->get('id'));
-        if (empty($article)) {
+        $categorie = $this->getCategorie($request->get('id'));
+        if (empty($categorie)) {
             return new JsonResponse(['message' => 'Categorie non trouvée'], Response::HTTP_NOT_FOUND);
         }
-        return $article;
+        return $categorie;
     }
 
     /**
      * @Rest\View(statusCode=Response::HTTP_CREATED)
      * @Post("/categories")
      */
-     public function postArticleAction(Request $request)
+     public function postCategorieAction(Request $request)
      {
          $categorie = new Categorie();
-         $categorie->setLibelle($request->get('libelle'));
+         $categorie->setIntitule($request->get('intitule'));
+         $categorie->setId($request->get('id'));
 
          $em = $this->get('doctrine.orm.entity_manager');
          $em->persist($categorie);

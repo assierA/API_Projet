@@ -3,7 +3,9 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Secteur;
+use AppBundle\Entity\Article;
+use AppBundle\Entity\Categorie;
+use AppBundle\Controller\CategorieController;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -62,8 +64,22 @@ class ArticleController extends AbstractFOSRestController
      */
     public function postArticleAction(Request $request)
     {
+
         $article = new Article();
         $article->setLibelle($request->get('libelle'));
+        $article->setId($request->get('id'));
+        $article->setPrix($request->get('prix'));
+        $article->setStock($request->get("stock"));
+
+        $ctrlCategorie = new CategorieController();
+        $cat = $ctrlCategorie->getCategorie(($request->get("categorie"))->get("id"));
+        $article->setCategorie($cat);
+
+        $errors = $this->get('validator')->validate($article);
+
+        if (count($errors)) {
+            return $this->view($errors, Response::HTTP_BAD_REQUEST);
+        }
 
         $em = $this->get('doctrine.orm.entity_manager');
         $em->persist($article);

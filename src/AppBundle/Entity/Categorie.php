@@ -29,5 +29,26 @@ class Categorie
     private $intitule;
 
 
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setIntitule($intitule) {
+        $this->intitule = $intitule;
+
+        return $this;
+    }
+
+    public function getIntitule() {
+        return $this->intitule;
+    }
 }
 
